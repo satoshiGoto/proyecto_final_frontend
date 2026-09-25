@@ -1,0 +1,1444 @@
+/* ==========================================================================
+   Tatakua · hoja de estilos
+   --------------------------------------------------------------------------
+   Orden:
+   1. Tokens (colores, tipografía, espacios) y modo oscuro
+   2. Base y accesibilidad
+   3. Componentes generales (botones, campos, chips)
+   4. Encabezado y navegación
+   5. Portada (hero)
+   6. Listado de recetas
+   7. Detalle de receta
+   8. Sobre el blog, contacto, pie
+   9. Roseta de ñandutí y su animación
+   10. Movimiento reducido
+   ========================================================================== */
+
+/* 1. Tokens ---------------------------------------------------------------- */
+
+:root {
+  /* Papel y tinta: fondo blanco frío y texto azul añil en lugar de negro */
+  --papel: #ffffff;
+  --papel-2: #f1f3f9;
+  --tinta: #1d2352;
+  --tinta-suave: #545a7e;
+  --linea: #d9dce8;
+  --acento: #c2255c;         /* hilo rosa oscurecido para que cumpla contraste AA como texto */
+  --acento-texto: #ffffff;
+  --error: #b3261e;
+  --ok: #1d7a55;
+
+  /* Hilos del ñandutí: solo se usan en las ilustraciones */
+  --hilo-rosa: #d6336c;
+  --hilo-amarillo: #e89b0c;
+  --hilo-verde: #23936a;
+  --hilo-celeste: #2f8fcb;
+  --hilo-urdimbre: rgba(29, 35, 82, 0.22);
+
+  /* Tipografía: escala modular 1.25 (tercera mayor), base 18px */
+  --f-texto: 'Alegreya', Georgia, serif;
+  --f-ui: 'Alegreya Sans', 'Segoe UI', system-ui, sans-serif;
+  --t-sm: 0.889rem;
+  --t-base: 1.125rem;
+  --t-md: 1.406rem;
+  --t-lg: 1.758rem;
+  --t-xl: 2.197rem;
+  --t-2xl: clamp(2.2rem, 5vw, 3.433rem);
+  --t-hero: clamp(4.2rem, 14vw, 10rem);
+
+  /* Espacios y formas */
+  --s-1: 0.5rem;
+  --s-2: 1rem;
+  --s-3: 1.5rem;
+  --s-4: 2.5rem;
+  --s-5: 4rem;
+  --s-6: clamp(4rem, 9vw, 7rem);
+  --radio-control: 6px;
+  --radio-chip: 999px;
+  --ancho: 72rem;
+  --medida: 38em; /* largo de línea máximo para texto corrido (~70 caracteres) */
+
+  color-scheme: light;
+}
+
+/* Modo oscuro: noche de añil, no negro. Se aplica por preferencia del sistema
+   salvo que el lector elija modo claro, y también si elige modo oscuro a mano. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --papel: #151a3f;
+    --papel-2: #1c2250;
+    --tinta: #eef0fa;
+    --tinta-suave: #b5b9d6;
+    --linea: #2f366b;
+    --acento: #ff7aa8;
+    --acento-texto: #151a3f;
+    --error: #ff8a80;
+    --ok: #6fdcaa;
+    --hilo-rosa: #ff6f9f;
+    --hilo-amarillo: #ffc24b;
+    --hilo-verde: #4ccb94;
+    --hilo-celeste: #6cc3f2;
+    --hilo-urdimbre: rgba(238, 240, 250, 0.2);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  --papel: #151a3f;
+  --papel-2: #1c2250;
+  --tinta: #eef0fa;
+  --tinta-suave: #b5b9d6;
+  --linea: #2f366b;
+  --acento: #ff7aa8;
+  --acento-texto: #151a3f;
+  --error: #ff8a80;
+  --ok: #6fdcaa;
+  --hilo-rosa: #ff6f9f;
+  --hilo-amarillo: #ffc24b;
+  --hilo-verde: #4ccb94;
+  --hilo-celeste: #6cc3f2;
+  --hilo-urdimbre: rgba(238, 240, 250, 0.2);
+  color-scheme: dark;
+}
+
+/* 2. Base y accesibilidad -------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 5rem; /* las anclas no quedan tapadas por el encabezado fijo */
+}
+
+body {
+  margin: 0;
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: var(--f-texto);
+  font-size: var(--t-base);
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--f-ui);
+  line-height: 1.1;
+  margin: 0;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--acento);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--s-2);
+  top: -3rem;
+  z-index: 100;
+  padding: var(--s-1) var(--s-2);
+  background: var(--tinta);
+  color: var(--papel);
+  font-family: var(--f-ui);
+  font-weight: 700;
+  border-radius: var(--radio-control);
+}
+
+.skip-link:focus {
+  top: var(--s-1);
+}
+
+.container {
+  width: 100%;
+  max-width: var(--ancho);
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 2rem);
+}
+
+main:focus {
+  outline: none;
+}
+
+.section-title {
+  font-size: var(--t-2xl);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.page-title {
+  font-size: var(--t-2xl);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-top: var(--s-5);
+}
+
+.page-title:focus,
+.recipe__title:focus {
+  outline: none;
+}
+
+/* 3. Componentes generales ------------------------------------------------- */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  min-height: 2.75rem;
+  padding: 0.6rem 1.25rem;
+  border: 2px solid var(--tinta);
+  border-radius: var(--radio-control);
+  background: var(--tinta);
+  color: var(--papel);
+  font-family: var(--f-ui);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: var(--acento);
+  border-color: var(--acento);
+  color: var(--acento-texto);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.button--ghost {
+  background: transparent;
+  color: var(--tinta);
+}
+
+.link-button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--tinta-suave);
+  font-family: var(--f-ui);
+  font-size: var(--t-sm);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  cursor: pointer;
+}
+
+.link-button:hover {
+  color: var(--acento);
+}
+
+/* Campos de formulario */
+.field {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.field label,
+.tags legend {
+  font-family: var(--f-ui);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='search'],
+select,
+textarea {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.55rem 0.8rem;
+  border: 1.5px solid var(--linea);
+  border-radius: var(--radio-control);
+  background: var(--papel);
+  font-family: var(--f-ui);
+  font-size: 1rem;
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+  border-color: var(--tinta-suave);
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--acento);
+  outline-offset: 0;
+  border-color: var(--tinta);
+}
+
+textarea {
+  resize: vertical;
+  line-height: 1.5;
+}
+
+[aria-invalid='true'] {
+  border-color: var(--error);
+}
+
+.field__error {
+  min-height: 1.2em;
+  color: var(--error);
+  font-family: var(--f-ui);
+  font-size: var(--t-sm);
+  font-weight: 500;
+}
+
+.field__hint {
+  color: var(--tinta-suave);
+  font-family: var(--f-ui);
+  font-size: var(--t-sm);
+}
+
+/* Chips de filtro: checkbox real, oculto visualmente pero accesible */
+.chip {
+  position: relative;
+  display: inline-flex;
+}
+
+.chip input {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.chip span {
+  display: inline-block;
+  padding: 0.35rem 0.95rem;
+  border: 1.5px solid var(--linea);
+  border-radius: var(--radio-chip);
+  font-family: var(--f-ui);
+  font-weight: 500;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.chip input:hover + span {
+  border-color: var(--tinta);
+}
+
+.chip input:checked + span {
+  background: var(--tinta);
+  border-color: var(--tinta);
+  color: var(--papel);
+}
+
+.chip input:focus-visible + span {
+  outline: 3px solid var(--acento);
+  outline-offset: 2px;
+}
+
+/* Botón de favorita con corazón */
+.fav-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.75rem;
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--tinta);
+  border-radius: var(--radio-control);
+  background: transparent;
+  font-family: var(--f-ui);
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.fav-button__icon {
+  width: 1.2rem;
+  height: 1.2rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+
+.fav-button:hover {
+  border-color: var(--acento);
+  color: var(--acento);
+}
+
+.fav-button[aria-pressed='true'] {
+  border-color: var(--acento);
+  color: var(--acento);
+}
+
+.fav-button[aria-pressed='true'] .fav-button__icon {
+  fill: currentColor;
+}
+
+/* La respuesta a la acción: el corazón late una vez al guardarse */
+.fav-button[aria-pressed='true'] .fav-button__icon {
+  animation: latido 0.35s ease-out;
+}
+
+@keyframes latido {
+  50% { transform: scale(1.3); }
+}
+
+.fav-button--compact {
+  min-height: 2.25rem;
+  padding: 0.25rem 0.7rem;
+  border-width: 1.5px;
+  font-size: 0.9rem;
+}
+
+/* Aviso breve */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: var(--s-3);
+  z-index: 60;
+  max-width: min(32rem, calc(100vw - 2rem));
+  padding: 0.75rem 1.2rem;
+  border-radius: var(--radio-control);
+  background: var(--tinta);
+  color: var(--papel);
+  font-family: var(--f-ui);
+  font-weight: 500;
+  transform: translate(-50%, 1rem);
+  opacity: 0;
+  transition: opacity 0.2s, transform 0.2s;
+  overflow-wrap: anywhere;
+}
+
+.toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* 4. Encabezado y navegación ----------------------------------------------- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--papel);
+  border-bottom: 1px solid var(--linea);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-2);
+  min-height: 4rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+}
+
+.brand__mark {
+  width: 2.1rem;
+  height: 2.1rem;
+}
+
+.brand__name {
+  font-family: var(--f-ui);
+  font-weight: 900;
+  font-size: 1.45rem;
+  letter-spacing: -0.02em;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+
+.site-nav__list {
+  display: flex;
+  gap: var(--s-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--f-ui);
+  font-weight: 500;
+}
+
+.site-nav__list a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding-block: 0.4rem;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+
+.site-nav__list a:hover {
+  border-bottom-color: var(--linea);
+}
+
+.site-nav__list a[aria-current='page'] {
+  border-bottom-color: var(--acento);
+}
+
+.fav-count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.35rem;
+  height: 1.35rem;
+  padding-inline: 0.3rem;
+  border-radius: var(--radio-chip);
+  background: var(--acento);
+  color: var(--acento-texto);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 2.5rem;
+  padding: 0.3rem 0.8rem;
+  border: 1.5px solid var(--linea);
+  border-radius: var(--radio-chip);
+  background: transparent;
+  font-family: var(--f-ui);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  border-color: var(--tinta);
+}
+
+/* Media luna dibujada con CSS: un círculo con otro recortándolo */
+.theme-toggle__icon {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  box-shadow: inset -0.3rem -0.1rem 0 0 currentColor;
+}
+
+.theme-toggle[aria-pressed='true'] .theme-toggle__icon {
+  box-shadow: none;
+  background: currentColor;
+}
+
+.nav-toggle {
+  display: none;
+}
+
+/* Menú plegable en pantallas angostas */
+@media (max-width: 52rem) {
+  .nav-toggle {
+    display: inline-grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 1.5px solid var(--linea);
+    border-radius: var(--radio-control);
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .nav-toggle__bars,
+  .nav-toggle__bars::before,
+  .nav-toggle__bars::after {
+    display: block;
+    width: 1.2rem;
+    height: 2px;
+    background: currentColor;
+    transition: transform 0.2s;
+  }
+
+  .nav-toggle__bars {
+    position: relative;
+  }
+
+  .nav-toggle__bars::before,
+  .nav-toggle__bars::after {
+    content: '';
+    position: absolute;
+    left: 0;
+  }
+
+  .nav-toggle__bars::before { top: -6px; }
+  .nav-toggle__bars::after { top: 6px; }
+
+  .nav-toggle[aria-expanded='true'] .nav-toggle__bars { background: transparent; }
+  .nav-toggle[aria-expanded='true'] .nav-toggle__bars::before { transform: translateY(6px) rotate(45deg); }
+  .nav-toggle[aria-expanded='true'] .nav-toggle__bars::after { transform: translateY(-6px) rotate(-45deg); }
+
+  .site-nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--s-2);
+    padding: var(--s-2) clamp(1rem, 4vw, 2rem) var(--s-3);
+    background: var(--papel);
+    border-bottom: 1px solid var(--linea);
+  }
+
+  .site-nav.is-open {
+    display: flex;
+  }
+
+  .site-nav__list {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .site-nav__list a {
+    width: 100%;
+    padding-block: 0.7rem;
+    border-bottom: 1px solid var(--linea);
+  }
+
+  .site-nav__list a[aria-current='page'] {
+    border-bottom-color: var(--linea);
+    color: var(--acento);
+  }
+
+  .theme-toggle {
+    align-self: flex-start;
+  }
+}
+
+/* 5. Portada --------------------------------------------------------------- */
+
+.hero {
+  padding-block: var(--s-5) var(--s-6);
+  overflow: hidden;
+}
+
+.hero__inner {
+  display: grid;
+  gap: var(--s-4);
+  align-items: center;
+}
+
+.hero__title {
+  font-size: var(--t-hero);
+  font-weight: 900;
+  line-height: 0.82;
+  letter-spacing: -0.045em;
+  margin-bottom: var(--s-3);
+  /* El título se deja caer sobre la roseta en escritorio: la palabra y el encaje comparten espacio */
+  position: relative;
+  z-index: 1;
+}
+
+.hero__lede {
+  font-size: var(--t-md);
+  line-height: 1.45;
+  max-width: 28ch;
+  margin-bottom: var(--s-2);
+}
+
+.hero__note {
+  color: var(--tinta-suave);
+  max-width: 36ch;
+  margin-bottom: var(--s-4);
+}
+
+.hero__art {
+  margin: 0;
+  justify-self: center;
+  width: min(100%, 26rem);
+}
+
+@media (min-width: 56rem) {
+  .hero__inner {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hero__text {
+    padding-block: var(--s-4);
+  }
+
+  .hero__title {
+    margin-right: -6rem;
+  }
+
+  .hero__art {
+    width: 40rem;
+    max-width: none;
+    justify-self: start;
+    margin-right: -10rem;
+  }
+}
+
+/* 6. Listado de recetas ---------------------------------------------------- */
+
+.recipes {
+  padding-bottom: var(--s-6);
+}
+
+.recipes__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-1) var(--s-2);
+  margin-bottom: var(--s-3);
+}
+
+.recipes__count {
+  color: var(--tinta-suave);
+  font-family: var(--f-ui);
+}
+
+.toolbar {
+  display: grid;
+  gap: var(--s-2) var(--s-3);
+  padding: var(--s-3) 0;
+  border-block: 1px solid var(--linea);
+  margin-bottom: var(--s-2);
+}
+
+.tags {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.tags legend {
+  padding: 0;
+  margin-bottom: 0.5rem;
+}
+
+.tags__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+@media (min-width: 48rem) {
+  .toolbar {
+    grid-template-columns: 1fr 14rem;
+  }
+
+  .tags {
+    grid-column: 1 / -1;
+  }
+}
+
+.post-list {
+  display: grid;
+  column-gap: var(--s-4);
+}
+
+@media (min-width: 48rem) {
+  .post-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.post {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  grid-template-areas:
+    'art text'
+    'art fav';
+  gap: 0.6rem var(--s-2);
+  align-items: start;
+  padding-block: var(--s-3);
+  border-bottom: 1px solid var(--linea);
+}
+
+.post__art {
+  grid-area: art;
+  display: block;
+  aspect-ratio: 1;
+}
+
+.post__text {
+  grid-area: text;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.post .fav-button {
+  grid-area: fav;
+  justify-self: start;
+}
+
+.post__title {
+  font-size: var(--t-lg);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.post__title a {
+  text-decoration: none;
+}
+
+.post__title a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--acento);
+}
+
+.post__excerpt {
+  max-width: var(--medida);
+}
+
+.post__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  color: var(--tinta-suave);
+  font-family: var(--f-ui);
+  font-size: var(--t-sm);
+}
+
+@media (min-width: 30rem) {
+  .post {
+    grid-template-columns: 7rem 1fr;
+  }
+}
+
+/* La receta más reciente se presenta grande, ocupando todo el ancho */
+.post--featured {
+  grid-column: 1 / -1;
+  padding-block: var(--s-4);
+}
+
+.post--featured .post__title {
+  font-size: var(--t-2xl);
+  font-weight: 900;
+  letter-spacing: -0.025em;
+}
+
+.post--featured .post__excerpt {
+  font-size: var(--t-md);
+  line-height: 1.45;
+}
+
+@media (min-width: 48rem) {
+  .post--featured {
+    grid-template-columns: 15rem 1fr;
+    column-gap: var(--s-4);
+    align-items: center;
+  }
+
+  .post--featured .fav-button {
+    align-self: start;
+  }
+}
+
+.status,
+.empty {
+  grid-column: 1 / -1;
+  padding-block: var(--s-5);
+  color: var(--tinta-suave);
+  font-family: var(--f-ui);
+}
+
+.empty {
+  display: grid;
+  justify-items: start;
+  gap: var(--s-2);
+  max-width: var(--medida);
+}
+
+.empty--error p {
+  color: var(--error);
+}
+
+/* 7. Detalle de receta ----------------------------------------------------- */
+
+.recipe {
+  padding-bottom: var(--s-6);
+}
+
+.back-link {
+  display: inline-block;
+  margin-block: var(--s-3);
+  font-family: var(--f-ui);
+  font-weight: 500;
+  color: var(--tinta-suave);
+}
+
+.back-link::before {
+  content: '← ';
+}
+
+.back-link:hover {
+  color: var(--acento);
+}
+
+.recipe__header {
+  display: grid;
+  gap: var(--s-3) var(--s-4);
+  align-items: center;
+  padding-bottom: var(--s-4);
+  border-bottom: 1px solid var(--linea);
+}
+
+.recipe__art {
+  width: min(16rem, 70vw);
+}
+
+.recipe__intro {
+  display: grid;
+  gap: var(--s-2);
+  justify-items: start;
+}
+
+.recipe__title {
+  font-size: clamp(2.8rem, 8vw, 5.4rem);
+  font-weight: 900;
+  line-height: 0.92;
+  letter-spacing: -0.035em;
+}
+
+.recipe__excerpt {
+  font-size: var(--t-md);
+  line-height: 1.45;
+  max-width: 34ch;
+}
+
+.recipe__byline {
+  color: var(--tinta-suave);
+  font-family: var(--f-ui);
+}
+
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-4);
+  margin: 0;
+}
+
+.facts dt {
+  color: var(--tinta-suave);
+  font-family: var(--f-ui);
+  font-size: var(--t-sm);
+}
+
+.facts dd {
+  margin: 0;
+  font-family: var(--f-ui);
+  font-weight: 700;
+  font-size: var(--t-md);
+}
+
+.recipe__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-1);
+}
+
+@media (min-width: 48rem) {
+  .recipe__header {
+    grid-template-columns: 20rem 1fr;
+  }
+
+  .recipe__art {
+    width: 100%;
+  }
+}
+
+.recipe__story {
+  display: grid;
+  gap: var(--s-2);
+  max-width: var(--medida);
+  padding-block: var(--s-4);
+  font-size: 1.2rem;
+  line-height: 1.7;
+}
+
+.recipe__story p:first-child::first-letter {
+  float: left;
+  margin: 0.08em 0.1em 0 0;
+  font-family: var(--f-ui);
+  font-weight: 900;
+  font-size: 3.6em;
+  line-height: 0.8;
+  color: var(--acento);
+}
+
+.recipe__body {
+  display: grid;
+  gap: var(--s-4);
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--linea);
+}
+
+@media (min-width: 56rem) {
+  .recipe__body {
+    grid-template-columns: 22rem 1fr;
+    gap: var(--s-5);
+  }
+
+  /* La lista de ingredientes acompaña al lector mientras baja por los pasos */
+  .ingredients {
+    position: sticky;
+    top: 5.5rem;
+    align-self: start;
+  }
+}
+
+.recipe__h2 {
+  font-size: var(--t-xl);
+  font-weight: 800;
+  margin-bottom: var(--s-2);
+}
+
+.ingredients {
+  padding: var(--s-3);
+  background: var(--papel-2);
+  border-radius: 10px;
+}
+
+.servings {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-2);
+  margin-bottom: var(--s-2);
+  font-family: var(--f-ui);
+  font-weight: 700;
+}
+
+.stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 1.5px solid var(--tinta);
+  border-radius: var(--radio-control);
+  overflow: hidden;
+}
+
+.stepper button {
+  width: 2.75rem;
+  height: 2.5rem;
+  border: 0;
+  background: transparent;
+  font-size: 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.stepper button:hover {
+  background: var(--tinta);
+  color: var(--papel);
+}
+
+.stepper button:focus-visible {
+  outline-offset: -3px;
+}
+
+.stepper output {
+  min-width: 2.5rem;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.ingredients__list {
+  list-style: none;
+  margin: 0 0 var(--s-2);
+  padding: 0;
+}
+
+.ingredients__list li + li {
+  border-top: 1px solid var(--linea);
+}
+
+.check {
+  display: grid;
+  grid-template-columns: 1.25rem 1fr;
+  gap: 0.75rem;
+  align-items: baseline;
+  padding-block: 0.6rem;
+  cursor: pointer;
+}
+
+.check input {
+  width: 1.15rem;
+  height: 1.15rem;
+  margin: 0;
+  accent-color: var(--acento);
+  transform: translateY(0.15rem);
+  cursor: pointer;
+}
+
+.check__qty {
+  font-family: var(--f-ui);
+  font-weight: 700;
+}
+
+/* Ingrediente ya agregado: se tacha y se atenúa */
+.check input:checked + span {
+  color: var(--tinta-suave);
+  text-decoration: line-through;
+  text-decoration-color: var(--acento);
+}
+
+/* Los pasos sí son una secuencia: la numeración grande tiene sentido acá */
+.steps__list {
+  counter-reset: paso;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.step {
+  counter-increment: paso;
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  gap: 0.4rem var(--s-2);
+  padding-block: var(--s-3);
+  border-bottom: 1px solid var(--linea);
+}
+
+.step:first-child {
+  padding-top: 0;
+}
+
+.step::before {
+  content: counter(paso);
+  grid-row: span 2;
+  font-family: var(--f-ui);
+  font-weight: 900;
+  font-size: 2.6rem;
+  line-height: 0.9;
+  color: var(--acento);
+  font-variant-numeric: lining-nums;
+}
+
+.step p {
+  max-width: var(--medida);
+  font-size: 1.15rem;
+}
+
+.timer {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.4rem;
+  min-height: 2.5rem;
+  padding: 0.3rem 0.4rem 0.3rem 0.9rem;
+  border: 1.5px solid var(--tinta);
+  border-radius: var(--radio-chip);
+  background: transparent;
+  font-family: var(--f-ui);
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.timer__time {
+  padding: 0.15rem 0.6rem;
+  border-radius: var(--radio-chip);
+  background: var(--papel-2);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.timer:hover {
+  border-color: var(--acento);
+}
+
+.timer.is-running {
+  background: var(--tinta);
+  border-color: var(--tinta);
+  color: var(--papel);
+}
+
+.timer.is-running .timer__time {
+  background: var(--acento);
+  color: var(--acento-texto);
+}
+
+.timer.is-done {
+  border-color: var(--ok);
+  color: var(--ok);
+}
+
+.pager {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-2);
+  margin-top: var(--s-5);
+}
+
+.pager__link {
+  display: grid;
+  gap: 0.2rem;
+  font-family: var(--f-ui);
+  font-weight: 800;
+  font-size: var(--t-md);
+  text-decoration: none;
+  line-height: 1.2;
+}
+
+.pager__link span {
+  color: var(--tinta-suave);
+  font-size: var(--t-sm);
+  font-weight: 500;
+}
+
+.pager__link--next {
+  text-align: right;
+}
+
+.pager__link:hover {
+  color: var(--acento);
+}
+
+.message {
+  display: grid;
+  gap: var(--s-2);
+  justify-items: start;
+  padding-bottom: var(--s-6);
+}
+
+.favorites {
+  padding-bottom: var(--s-6);
+}
+
+.favorites__note {
+  color: var(--tinta-suave);
+  font-family: var(--f-ui);
+  margin: var(--s-1) 0 var(--s-3);
+}
+
+/* 8. Sobre el blog, contacto, pie ------------------------------------------ */
+
+.about {
+  padding-block: var(--s-6);
+  background: var(--papel-2);
+}
+
+.about__inner {
+  display: grid;
+  gap: var(--s-3) var(--s-5);
+}
+
+.about__body {
+  display: grid;
+  gap: var(--s-2);
+  max-width: var(--medida);
+  font-size: 1.2rem;
+  line-height: 1.7;
+}
+
+@media (min-width: 56rem) {
+  .about__inner {
+    grid-template-columns: 1fr 2fr;
+  }
+}
+
+.contact {
+  padding-block: var(--s-6);
+}
+
+.contact__inner {
+  display: grid;
+  gap: var(--s-4) var(--s-5);
+}
+
+.contact__intro {
+  display: grid;
+  gap: var(--s-2);
+  align-content: start;
+  max-width: 28ch;
+  font-size: var(--t-md);
+  line-height: 1.45;
+}
+
+.contact-form {
+  display: grid;
+  gap: var(--s-1);
+  max-width: 36rem;
+}
+
+.contact-form .button {
+  justify-self: start;
+  margin-top: var(--s-1);
+}
+
+.form-status {
+  min-height: 1.5em;
+  font-family: var(--f-ui);
+  font-weight: 500;
+}
+
+.form-status[data-state='ok'] {
+  color: var(--ok);
+}
+
+.form-status[data-state='error'] {
+  color: var(--error);
+}
+
+@media (min-width: 56rem) {
+  .contact__inner {
+    grid-template-columns: 1fr 2fr;
+  }
+}
+
+.site-footer {
+  padding-block: var(--s-4);
+  border-top: 1px solid var(--linea);
+  color: var(--tinta-suave);
+  font-family: var(--f-ui);
+  font-size: var(--t-sm);
+}
+
+.site-footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--s-1) var(--s-3);
+}
+
+/* 9. Roseta de ñandutí ----------------------------------------------------- */
+
+.nanduti {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.nanduti__warp path,
+.nanduti__warp circle {
+  stroke: var(--hilo-urdimbre);
+  stroke-width: 0.5;
+}
+
+.nanduti__ring path {
+  stroke-width: 1.3;
+}
+
+.nanduti__guide {
+  stroke-width: 0.45;
+  opacity: 0.6;
+}
+
+.nanduti__center path {
+  stroke-width: 1.4;
+}
+
+/* Miniaturas: trazos más gruesos para que se lean a 100 px */
+.post:not(.post--featured) .nanduti__ring path,
+.post:not(.post--featured) .nanduti__center path {
+  stroke-width: 2.4;
+}
+
+.post:not(.post--featured) .nanduti__warp path {
+  stroke-width: 0.8;
+}
+
+.brand__mark .nanduti__ring path,
+.brand__mark .nanduti__center path {
+  stroke-width: 5;
+}
+
+.brand__mark .nanduti__warp {
+  display: none;
+}
+
+/* Tejido de la portada: el encaje se arma del centro hacia afuera, como se teje a mano */
+.is-weaving path,
+.is-weaving circle[pathLength] {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: tejer 1.4s cubic-bezier(0.3, 0.1, 0.2, 1) forwards;
+  animation-delay: calc(var(--i, 0) * 220ms);
+}
+
+.is-weaving .nanduti__warp path,
+.is-weaving .nanduti__warp circle {
+  animation-duration: 2.2s;
+}
+
+.is-weaving .nanduti__center circle:not([pathLength]) {
+  opacity: 0;
+  animation: aparecer 0.4s ease-out forwards;
+}
+
+@keyframes tejer {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes aparecer {
+  to { opacity: 1; }
+}
+
+/* 10. Movimiento reducido -------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
