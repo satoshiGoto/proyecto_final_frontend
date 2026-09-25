@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es-PY">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tatakua, cocina paraguaya de casa</title>
+  <meta name="description" content="Blog de recetas paraguayas caseras: sopa paraguaya, chipa, vori vori, tereré y más, explicadas paso a paso.">
+  <meta name="theme-color" content="#1D2352">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+  <!-- Tipografías: Alegreya (texto) y Alegreya Sans (títulos e interfaz). Soportan los diacríticos del guaraní. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=Alegreya+Sans:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Se aplica el tema guardado antes de pintar, para evitar un parpadeo -->
+  <script>
+    try {
+      const t = localStorage.getItem('tatakua:tema');
+      if (t) document.documentElement.dataset.theme = t;
+    } catch (e) { /* almacenamiento no disponible */ }
+  </script>
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <!-- ========== Encabezado ========== -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="#/" aria-label="Tatakua, ir al inicio">
+        <span class="brand__mark" data-nanduti-mini aria-hidden="true"></span>
+        <span class="brand__name">Tatakua</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-principal">
+        <span class="nav-toggle__bars" aria-hidden="true"></span>
+        <span class="visually-hidden">Abrir menú</span>
+      </button>
+
+      <nav id="nav-principal" class="site-nav" aria-label="Principal">
+        <ul class="site-nav__list">
+          <li><a href="#/" data-nav="inicio">Recetas</a></li>
+          <li><a href="#/favoritas" data-nav="favoritas">Favoritas <span class="fav-count" data-fav-count hidden></span></a></li>
+          <li><a href="#sobre" data-nav="sobre">Sobre el blog</a></li>
+          <li><a href="#contacto" data-nav="contacto">Contacto</a></li>
+        </ul>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="false">
+          <span class="theme-toggle__icon" aria-hidden="true"></span>
+          <span data-theme-label>Modo oscuro</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- El contenido de cada vista lo dibuja js/views.js según la ruta (#/, #/receta/..., #/favoritas) -->
+  <main id="contenido" tabindex="-1">
+
+    <!-- Vista: inicio -->
+    <div class="view" data-view="inicio">
+      <section class="hero" aria-labelledby="hero-titulo">
+        <div class="container hero__inner">
+          <div class="hero__text">
+            <h1 id="hero-titulo" class="hero__title">Tatakua</h1>
+            <p class="hero__lede">Recetas paraguayas como se hacen en casa: con queso Paraguay, almidón de mandioca, harina de maíz y paciencia.</p>
+            <p class="hero__note">El tatakua es el horno de barro del patio. Acá están las recetas que salen de él y de la cocina de al lado.</p>
+            <a class="button" href="#recetas">Ver las recetas</a>
+          </div>
+          <figure class="hero__art" aria-hidden="true">
+            <div class="hero__nanduti" data-nanduti-hero></div>
+          </figure>
+        </div>
+      </section>
+
+      <section id="recetas" class="recipes" aria-labelledby="recetas-titulo">
+        <div class="container">
+          <div class="recipes__head">
+            <h2 id="recetas-titulo" class="section-title">Recetas</h2>
+            <p class="recipes__count" data-results-count aria-live="polite"></p>
+          </div>
+
+          <form class="toolbar" role="search" data-filters>
+            <div class="field field--search">
+              <label for="buscar">Buscar receta o ingrediente</label>
+              <input id="buscar" name="q" type="search" placeholder="Ej.: queso, choclo, mbeju" autocomplete="off">
+            </div>
+            <div class="field field--sort">
+              <label for="orden">Ordenar</label>
+              <select id="orden" name="orden">
+                <option value="recientes">Más recientes</option>
+                <option value="rapidas">Más rápidas</option>
+                <option value="az">De la A a la Z</option>
+              </select>
+            </div>
+            <fieldset class="tags">
+              <legend>Filtrar por forma de cocción</legend>
+              <div class="tags__list" data-tag-list>
+                <!-- Chips generados desde posts.json -->
+              </div>
+            </fieldset>
+          </form>
+
+          <div class="post-list" data-post-list aria-busy="true">
+            <!-- Estado de carga: se reemplaza al recibir los datos -->
+            <p class="status">Cargando recetas…</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="sobre" class="about" aria-labelledby="sobre-titulo">
+        <div class="container about__inner">
+          <h2 id="sobre-titulo" class="section-title">Sobre el blog</h2>
+          <div class="about__body">
+            <p>Tatakua nació como un cuaderno para no perder las recetas de la familia. Cada una está probada en una cocina común, con ingredientes que se consiguen en cualquier despensa de Asunción o en un mercado latino si vivís afuera.</p>
+            <p>Vas a notar que casi nada lleva harina de trigo. La cocina paraguaya se apoya en la mandioca y el maíz, así que la mayoría de estas recetas son naturalmente sin gluten. Igual revisá cada ingrediente si cocinás para alguien celíaco.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="contacto" class="contact" aria-labelledby="contacto-titulo">
+        <div class="container contact__inner">
+          <div class="contact__intro">
+            <h2 id="contacto-titulo" class="section-title">Mandá tu receta</h2>
+            <p>¿Tu familia hace la chipa de otra forma? Contanos cómo y la probamos para el blog.</p>
+          </div>
+
+          <form class="contact-form" data-contact-form novalidate>
+            <div class="field">
+              <label for="c-nombre">Nombre</label>
+              <input id="c-nombre" name="nombre" type="text" autocomplete="name" required minlength="2" aria-describedby="c-nombre-error">
+              <p class="field__error" id="c-nombre-error" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <label for="c-email">Correo electrónico</label>
+              <input id="c-email" name="email" type="email" autocomplete="email" required aria-describedby="c-email-error">
+              <p class="field__error" id="c-email-error" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <label for="c-receta">Receta</label>
+              <input id="c-receta" name="receta" type="text" required placeholder="Ej.: chipa so'o" aria-describedby="c-receta-error">
+              <p class="field__error" id="c-receta-error" aria-live="polite"></p>
+            </div>
+            <div class="field">
+              <label for="c-mensaje">Cómo la hacen en tu casa</label>
+              <textarea id="c-mensaje" name="mensaje" rows="5" required minlength="20" aria-describedby="c-mensaje-error c-mensaje-ayuda"></textarea>
+              <p class="field__hint" id="c-mensaje-ayuda">Mínimo 20 caracteres. Ingredientes y pasos, como te salga.</p>
+              <p class="field__error" id="c-mensaje-error" aria-live="polite"></p>
+            </div>
+            <button class="button" type="submit">Enviar receta</button>
+            <p class="form-status" data-form-status role="status"></p>
+          </form>
+        </div>
+      </section>
+    </div>
+
+    <!-- Vista: detalle de receta -->
+    <article class="view recipe" data-view="receta" hidden aria-live="polite"></article>
+
+    <!-- Vista: favoritas -->
+    <section class="view favorites" data-view="favoritas" hidden aria-labelledby="fav-titulo">
+      <div class="container">
+        <h1 id="fav-titulo" class="page-title">Tus favoritas</h1>
+        <p class="favorites__note">Se guardan en este navegador.</p>
+        <div class="post-list" data-fav-list></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========== Pie de página ========== -->
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p>Tatakua, proyecto final del módulo de Frontend (2026).</p>
+      <p>Las ilustraciones son rosetas de ñandutí, el encaje tradicional de Itauguá, generadas con SVG.</p>
+    </div>
+  </footer>
+
+  <!-- Aviso breve (toast) para confirmar acciones -->
+  <div class="toast" data-toast role="status" aria-live="polite" hidden></div>
+</body>
+</html>
