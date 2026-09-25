@@ -1,0 +1,271 @@
+{
+  "blog": {
+    "name": "Tatakua",
+    "tagline": "Cocina paraguaya de casa, explicada paso a paso."
+  },
+  "tags": [
+    { "id": "horno", "label": "Al horno" },
+    { "id": "sarten", "label": "En sartén" },
+    { "id": "olla", "label": "En olla" },
+    { "id": "sin-horno", "label": "Sin fuego" },
+    { "id": "semana-santa", "label": "Semana Santa" },
+    { "id": "dulce", "label": "Dulce" }
+  ],
+  "posts": [
+    {
+      "slug": "sopa-paraguaya",
+      "title": "Sopa paraguaya",
+      "excerpt": "La única sopa del mundo que se corta con cuchillo. Harina de maíz, cebolla y mucho queso Paraguay, horneados hasta dorar.",
+      "date": "2026-09-12",
+      "author": "Satoshi Goto",
+      "tags": ["horno"],
+      "servings": 8,
+      "prepMinutes": 20,
+      "cookMinutes": 50,
+      "story": [
+        "Cuenta la historia que el cocinero de Carlos Antonio López se pasó de harina en una sopa blanca y, para salvarla, la mandó al horno. Nadie sabe si fue así, pero el resultado quedó: un pan húmedo y salado que hoy acompaña cualquier asado.",
+        "El secreto está en sofreír bien la cebolla en la grasa y en no escatimar con el queso. Si el queso Paraguay es muy salado, probá la mezcla antes de agregar sal."
+      ],
+      "ingredients": [
+        { "qty": 500, "unit": "g", "item": "harina de maíz" },
+        { "qty": 2, "unit": "", "item": "cebollas grandes, picadas" },
+        { "qty": 500, "unit": "g", "item": "queso Paraguay desmenuzado" },
+        { "qty": 500, "unit": "ml", "item": "leche" },
+        { "qty": 4, "unit": "", "item": "huevos" },
+        { "qty": 150, "unit": "g", "item": "grasa de cerdo o manteca" },
+        { "qty": 1, "unit": "cdita", "item": "sal" }
+      ],
+      "steps": [
+        { "text": "Sofreí la cebolla en la mitad de la grasa, a fuego bajo, hasta que quede transparente. Dejá entibiar.", "minutes": 10 },
+        { "text": "Batí el resto de la grasa con los huevos hasta que la mezcla se vea cremosa." },
+        { "text": "Agregá la cebolla, el queso y la sal. Mezclá bien." },
+        { "text": "Incorporá la harina de maíz y la leche de a poco, alternando, hasta lograr una pasta espesa que caiga de la cuchara." },
+        { "text": "Volcá en una fuente enmantecada y horneá a 180 °C hasta que la superficie esté dorada y un palillo salga seco.", "minutes": 50 },
+        { "text": "Dejá reposar diez minutos antes de cortar en cuadrados.", "minutes": 10 }
+      ],
+      "nanduti": { "petals": 12, "rings": 4, "colors": ["rosa", "amarillo", "verde"] }
+    },
+    {
+      "slug": "chipa-almidon",
+      "title": "Chipa almidón",
+      "excerpt": "Rosquitas de almidón de mandioca y queso, crocantes por fuera y elásticas por dentro. La receta que se repite cada Semana Santa.",
+      "date": "2026-08-28",
+      "author": "Satoshi Goto",
+      "tags": ["horno", "semana-santa"],
+      "servings": 24,
+      "prepMinutes": 30,
+      "cookMinutes": 25,
+      "story": [
+        "En Semana Santa las cocinas paraguayas se llenan de chipa: se hornea el miércoles para no prender el fuego el Viernes Santo. Cada familia defiende su forma: rosca, bollito o chipa kavure enroscada en un palo.",
+        "El almidón de mandioca no tiene gluten, así que la masa no se amasa como un pan: se une con las manos hasta que deja de pegarse. Si se agrieta, le falta leche; si se pega, le falta almidón."
+      ],
+      "ingredients": [
+        { "qty": 1, "unit": "kg", "item": "almidón de mandioca" },
+        { "qty": 500, "unit": "g", "item": "queso Paraguay rallado" },
+        { "qty": 4, "unit": "", "item": "huevos" },
+        { "qty": 150, "unit": "g", "item": "grasa de cerdo o manteca" },
+        { "qty": 150, "unit": "ml", "item": "leche" },
+        { "qty": 1, "unit": "cda", "item": "semillas de anís" },
+        { "qty": 1, "unit": "cdita", "item": "sal" }
+      ],
+      "steps": [
+        { "text": "Precalentá el horno a 200 °C.", "minutes": 15 },
+        { "text": "Batí la grasa con los huevos y la sal hasta integrar." },
+        { "text": "Sumá el queso, el anís y el almidón. Uní con las manos." },
+        { "text": "Agregá la leche de a chorritos hasta que la masa esté suave y no se pegue a los dedos." },
+        { "text": "Formá rosquitas del tamaño de la palma y acomodalas en una placa con separación." },
+        { "text": "Horneá hasta que estén doradas por debajo y apenas coloreadas arriba.", "minutes": 20 }
+      ],
+      "nanduti": { "petals": 16, "rings": 3, "colors": ["amarillo", "celeste", "rosa"] }
+    },
+    {
+      "slug": "vori-vori",
+      "title": "Vori vori de gallina",
+      "excerpt": "Caldo espeso de gallina con bolitas de harina de maíz y queso. El plato de los días fríos y de las abuelas.",
+      "date": "2026-08-10",
+      "author": "Satoshi Goto",
+      "tags": ["olla"],
+      "servings": 6,
+      "prepMinutes": 30,
+      "cookMinutes": 70,
+      "story": [
+        "El nombre viene del guaraní “bori bori”, que suena a algo que se repite, como las bolitas que flotan en el plato. Es la sopa que aparece cuando alguien está resfriado o cuando baja la temperatura en julio.",
+        "La gallina casera da un caldo con más cuerpo que el pollo. Si usás pollo, sumá un hueso de caracú para que el caldo quede sustancioso."
+      ],
+      "ingredients": [
+        { "qty": 1, "unit": "", "item": "gallina casera trozada" },
+        { "qty": 3, "unit": "l", "item": "agua" },
+        { "qty": 1, "unit": "", "item": "cebolla picada" },
+        { "qty": 1, "unit": "", "item": "morrón rojo picado" },
+        { "qty": 2, "unit": "", "item": "tomates picados" },
+        { "qty": 300, "unit": "g", "item": "harina de maíz" },
+        { "qty": 200, "unit": "g", "item": "queso Paraguay rallado" },
+        { "qty": 2, "unit": "cdas", "item": "grasa o aceite" },
+        { "qty": 1, "unit": "cdita", "item": "sal" }
+      ],
+      "steps": [
+        { "text": "Hervé la gallina en el agua con sal, quitando la espuma, hasta que la carne esté tierna.", "minutes": 45 },
+        { "text": "Mientras tanto, sofreí la cebolla, el morrón y el tomate en la grasa.", "minutes": 10 },
+        { "text": "Mezclá la harina de maíz con el queso y un cucharón de caldo caliente hasta formar una masa que se pueda moldear." },
+        { "text": "Formá bolitas del tamaño de una avellana." },
+        { "text": "Agregá el sofrito al caldo y echá las bolitas de a poco, sin revolver fuerte, hasta que floten y el caldo espese.", "minutes": 15 }
+      ],
+      "nanduti": { "petals": 10, "rings": 5, "colors": ["verde", "amarillo", "celeste"] }
+    },
+    {
+      "slug": "terere",
+      "title": "Tereré con yuyos",
+      "excerpt": "Yerba mate, agua bien fría y un puñado de yuyos machacados. No es una receta: es una forma de pasar la tarde.",
+      "date": "2026-07-22",
+      "author": "Satoshi Goto",
+      "tags": ["sin-horno"],
+      "servings": 4,
+      "prepMinutes": 10,
+      "cookMinutes": 0,
+      "story": [
+        "En 2020 la UNESCO inscribió las prácticas y saberes del tereré como Patrimonio Cultural Inmaterial de la Humanidad. Se comparte en ronda, con una sola guampa, y quien ceba sirve a cada persona por turno.",
+        "Los yuyos no son decoración. Menta'i refresca, cedrón perfuma y el burrito ayuda a la digestión. Se machacan en el mortero para que suelten su jugo."
+      ],
+      "ingredients": [
+        { "qty": 1, "unit": "l", "item": "agua muy fría, con hielo" },
+        { "qty": 1, "unit": "puñado", "item": "menta'i" },
+        { "qty": 3, "unit": "ramitas", "item": "cedrón" },
+        { "qty": 2, "unit": "ramitas", "item": "burrito" },
+        { "qty": 1, "unit": "guampa", "item": "yerba mate, hasta dos tercios" }
+      ],
+      "steps": [
+        { "text": "Machacá los yuyos en el mortero y ponelos en el termo con el agua y el hielo." },
+        { "text": "Dejá que el agua tome sabor.", "minutes": 5 },
+        { "text": "Llená la guampa con yerba hasta dos tercios, tapala con la mano, sacudila e inclinala para que el polvo quede arriba." },
+        { "text": "Colocá la bombilla del lado bajo y cebá el agua sobre ese costado." },
+        { "text": "Tomá toda el agua, volvé a cebar y pasá la guampa a la siguiente persona de la ronda." }
+      ],
+      "nanduti": { "petals": 8, "rings": 4, "colors": ["celeste", "verde", "rosa"] }
+    },
+    {
+      "slug": "chipa-guasu",
+      "title": "Chipa guasu",
+      "excerpt": "Primo de la sopa paraguaya, pero con choclo fresco rallado. Más húmedo, más dulce y mejor cuando es temporada de maíz.",
+      "date": "2026-07-05",
+      "author": "Satoshi Goto",
+      "tags": ["horno"],
+      "servings": 8,
+      "prepMinutes": 25,
+      "cookMinutes": 45,
+      "story": [
+        "“Guasu” significa grande en guaraní. Es la chipa que no entra en la mano y se sirve en porciones, casi siempre al lado de un buen corte de carne.",
+        "Usá choclos tiernos: el grano debe largar jugo al apretarlo con la uña. Si están secos, compensá con un poco más de leche."
+      ],
+      "ingredients": [
+        { "qty": 8, "unit": "", "item": "choclos tiernos, desgranados" },
+        { "qty": 2, "unit": "", "item": "cebollas picadas" },
+        { "qty": 400, "unit": "g", "item": "queso Paraguay desmenuzado" },
+        { "qty": 4, "unit": "", "item": "huevos" },
+        { "qty": 250, "unit": "ml", "item": "leche" },
+        { "qty": 100, "unit": "g", "item": "manteca" },
+        { "qty": 1, "unit": "cdita", "item": "sal" }
+      ],
+      "steps": [
+        { "text": "Procesá los granos de choclo con la leche hasta lograr una crema con algo de textura." },
+        { "text": "Rehogá la cebolla en la manteca hasta que esté tierna.", "minutes": 8 },
+        { "text": "Separá las claras y batilas a nieve." },
+        { "text": "Mezclá la crema de choclo con la cebolla, el queso, las yemas y la sal. Incorporá las claras con movimientos envolventes." },
+        { "text": "Horneá en fuente enmantecada a 180 °C hasta que esté firme y dorado.", "minutes": 45 }
+      ],
+      "nanduti": { "petals": 14, "rings": 4, "colors": ["amarillo", "verde", "rosa"] }
+    },
+    {
+      "slug": "mbeju",
+      "title": "Mbeju",
+      "excerpt": "Torta de almidón y queso hecha en sartén, en diez minutos. Ideal para el cocido de la mañana.",
+      "date": "2026-06-18",
+      "author": "Satoshi Goto",
+      "tags": ["sarten"],
+      "servings": 2,
+      "prepMinutes": 10,
+      "cookMinutes": 10,
+      "story": [
+        "El mbeju es uno de los platos más antiguos del Paraguay: los guaraníes ya tostaban almidón de mandioca sobre piedras calientes. Hoy se acompaña con cocido quemado o con café con leche.",
+        "La textura correcta es arenosa antes de ir a la sartén: la mezcla debe desmoronarse entre los dedos, sin llegar a formar una masa."
+      ],
+      "ingredients": [
+        { "qty": 250, "unit": "g", "item": "almidón de mandioca" },
+        { "qty": 150, "unit": "g", "item": "queso Paraguay rallado" },
+        { "qty": 2, "unit": "cdas", "item": "grasa o manteca" },
+        { "qty": 60, "unit": "ml", "item": "leche" },
+        { "qty": 1, "unit": "pizca", "item": "sal" }
+      ],
+      "steps": [
+        { "text": "Uní la grasa con la sal y el queso, y sumá el almidón frotando con las manos." },
+        { "text": "Agregá la leche de a poco hasta que la mezcla parezca arena húmeda." },
+        { "text": "Calentá una sartén de hierro, volcá la mezcla y aplastala con una espátula hasta formar un disco." },
+        { "text": "Cociná hasta que se dore por debajo, dalo vuelta con ayuda de un plato y dorá el otro lado.", "minutes": 8 }
+      ],
+      "nanduti": { "petals": 9, "rings": 3, "colors": ["rosa", "celeste", "amarillo"] }
+    },
+    {
+      "slug": "pastel-mandio",
+      "title": "Pastel mandi'o",
+      "excerpt": "Empanadas con masa de mandioca hervida y relleno de carne. Se fríen y se comen calientes, con los dedos.",
+      "date": "2026-05-30",
+      "author": "Satoshi Goto",
+      "tags": ["sarten"],
+      "servings": 12,
+      "prepMinutes": 60,
+      "cookMinutes": 30,
+      "story": [
+        "Mandi'o es mandioca en guaraní, y acá la mandioca está en todo. En esta receta reemplaza a la harina de trigo: se hierve, se pisa y se une con un poco de harina de maíz.",
+        "Trabajá la masa tibia; al enfriarse se vuelve quebradiza. Si se agrieta al cerrar, humedecé el borde con agua."
+      ],
+      "ingredients": [
+        { "qty": 1, "unit": "kg", "item": "mandioca pelada" },
+        { "qty": 150, "unit": "g", "item": "harina de maíz" },
+        { "qty": 1, "unit": "", "item": "huevo" },
+        { "qty": 500, "unit": "g", "item": "carne picada" },
+        { "qty": 2, "unit": "", "item": "cebollas picadas" },
+        { "qty": 2, "unit": "", "item": "huevos duros picados" },
+        { "qty": 1, "unit": "cdita", "item": "comino" },
+        { "qty": 1, "unit": "l", "item": "aceite para freír" }
+      ],
+      "steps": [
+        { "text": "Hervé la mandioca en agua con sal hasta que esté bien tierna.", "minutes": 25 },
+        { "text": "Cociná la carne con la cebolla y el comino. Al final, sumá el huevo duro y dejá enfriar.", "minutes": 15 },
+        { "text": "Pisá la mandioca todavía tibia, quitando las fibras, y uní con el huevo crudo y la harina de maíz." },
+        { "text": "Estirá porciones de masa entre dos plásticos, rellená, cerrá en forma de media luna y marcá el borde con un tenedor." },
+        { "text": "Freí en aceite caliente hasta que estén doradas, de a pocas por vez.", "minutes": 4 }
+      ],
+      "nanduti": { "petals": 11, "rings": 5, "colors": ["verde", "rosa", "celeste"] }
+    },
+    {
+      "slug": "kiveve",
+      "title": "Kiveve",
+      "excerpt": "Crema anaranjada de andai con queso y un toque de azúcar. Dulce y salado a la vez, como tantas cosas de acá.",
+      "date": "2026-05-11",
+      "author": "Satoshi Goto",
+      "tags": ["olla", "dulce"],
+      "servings": 4,
+      "prepMinutes": 15,
+      "cookMinutes": 35,
+      "story": [
+        "El andai es el zapallo criollo paraguayo. El kiveve se sirve tibio como acompañamiento o solo, en un plato hondo, y su color anuncia desde lejos lo que hay para almorzar.",
+        "Revolvé sin parar cuando agregues la harina de maíz: se pega al fondo con facilidad."
+      ],
+      "ingredients": [
+        { "qty": 1, "unit": "kg", "item": "andai o zapallo, pelado y en cubos" },
+        { "qty": 1, "unit": "", "item": "cebolla picada" },
+        { "qty": 2, "unit": "cdas", "item": "manteca" },
+        { "qty": 250, "unit": "ml", "item": "leche" },
+        { "qty": 100, "unit": "g", "item": "harina de maíz" },
+        { "qty": 200, "unit": "g", "item": "queso Paraguay en cubitos" },
+        { "qty": 2, "unit": "cdas", "item": "azúcar" }
+      ],
+      "steps": [
+        { "text": "Rehogá la cebolla en la manteca y sumá el andai con un poco de agua. Cociná tapado hasta que se deshaga.", "minutes": 20 },
+        { "text": "Pisá hasta obtener un puré liso y agregá la leche y el azúcar." },
+        { "text": "Incorporá la harina de maíz en lluvia, revolviendo, y cociná hasta que espese.", "minutes": 10 },
+        { "text": "Apagá el fuego, sumá el queso y mezclá hasta que empiece a derretirse." }
+      ],
+      "nanduti": { "petals": 13, "rings": 3, "colors": ["amarillo", "rosa", "verde"] }
+    }
+  ]
+}
